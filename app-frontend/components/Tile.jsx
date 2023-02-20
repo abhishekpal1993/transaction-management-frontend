@@ -10,8 +10,7 @@ const Tile = () => (
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
     </a>
-
   </div>
-)
+);
 
 export default Tile;

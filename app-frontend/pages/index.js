@@ -1,7 +1,4 @@
-import Head from 'next/head'
-import Footer from "../components/Footer";
-import Hero from "../components/Hero";
-import Tile from "../components/Tile";
+import Head from "next/head";
 
 export default function Home() {
   return (
@@ -17,5 +14,5 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
