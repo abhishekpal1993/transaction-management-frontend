@@ -45,19 +45,21 @@ export default () => {
           <Input inputClassName="mb-4" placeholder="Enter your name" />
           <Input
             isError={true}
-            inputClassName="mb-4"
+            labelClassName="mb-4"
             placeholder="Enter your name(Error)"
+            error={"some error!"}
           />
           <Input
-            inputClassName="mb-4"
+            labelClassName="mb-4"
             placeholder='"Peter Griffin" or "Lois Griffin"'
             label="Name"
           />
           <Input
             isError={true}
-            inputClassName="mb-4"
+            labelClassName="mb-4"
             placeholder='"Peter Griffin" or "Lois Griffin" (Error)'
             label="Name"
+            error={"some error!"}
           />
         </div>
         {/* !!! SUBMIT FORM !!! */}

@@ -2,7 +2,7 @@ import { append } from "../../utils/classname";
 import { InputLabel } from "../atoms";
 
 export const Input = ({
-  label,
+  label = "",
   labelClassName,
   inputClassName,
   isError = false,
@@ -13,10 +13,12 @@ export const Input = ({
     !!isError ? "text-red-500" : "text-gray-700"
   }`;
   const defaultInputClassName = `appearance-none border rounded w-full py-2 px-3 leading-tight ${
-    !!isError ? "text-red-700 focus:outline-red-500" : "text-gray-700"
+    !!isError
+      ? "text-red-700 border-red-500 focus:outline-red-500"
+      : "text-gray-700"
   }`;
 
-  return !!label ? (
+  return (
     <InputLabel className={append(defaultLabelClassName, labelClassName)}>
       {label}
       <input
@@ -29,10 +31,5 @@ export const Input = ({
         </span>
       )}
     </InputLabel>
-  ) : (
-    <input
-      {...props}
-      className={append(defaultInputClassName, inputClassName)}
-    />
   );
 };
