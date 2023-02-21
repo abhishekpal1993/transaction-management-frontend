@@ -10,7 +10,7 @@ export const Form = (props) => {
 
   return props.children({
     values: formik.values,
-    errors: formik.errors,
-    touched: formik.touched,
+    handleChange: formik.handleChange,
+    handleSubmit: formik.handleSubmit,
   });
 };

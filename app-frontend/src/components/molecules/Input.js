@@ -1,13 +1,7 @@
 import { append } from "../../utils/classname";
 import { InputLabel } from "../atoms";
 
-export const Input = ({
-  label,
-  children,
-  labelClassName,
-  inputClassName,
-  ...props
-}) => {
+export const Input = ({ label, labelClassName, inputClassName, ...props }) => {
   const defaultLabelClassName =
     "flex flex-col justify-center items-start w-full";
   const defaultInputClassName =
@@ -18,13 +12,12 @@ export const Input = ({
       <input
         {...props}
         className={append(defaultInputClassName, inputClassName)}
-      >
-        {children}
-      </input>
+      />
     </InputLabel>
   ) : (
-    <input {...props} className={append(defaultInputClassName, inputClassName)}>
-      {children}
-    </input>
+    <input
+      {...props}
+      className={append(defaultInputClassName, inputClassName)}
+    />
   );
 };

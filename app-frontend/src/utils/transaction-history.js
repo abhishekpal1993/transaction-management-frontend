@@ -1,5 +1,5 @@
 export const getTransactionTextForDebit = (amount, accountId, currency = "$") =>
-  `Transferred ${currency}${amount} from account ${accountId}`;
+  `Transferred ${currency}${Math.abs(amount)} from account ${accountId}`;
 
 export const getTransactionTextForCredit = (
   amount,
