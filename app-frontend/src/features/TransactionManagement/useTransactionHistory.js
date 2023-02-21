@@ -5,6 +5,7 @@ import {
   getTransactionById,
   createTransaction,
 } from "../../services/accounting";
+import { BACKEND_RESPONSE_KEYS } from "../../common/constants";
 
 export const useTransactionHistory = (props) => {
   const [transactions, setTransactions] = useState(props.transactions);
@@ -25,7 +26,7 @@ export const useTransactionHistory = (props) => {
     () =>
       transactions.map((trnx) => ({
         ...trnx,
-        balance: accounts[trnx.account_id],
+        balance: accounts[trnx[BACKEND_RESPONSE_KEYS.accountId]],
       })),
     [transactions, accounts]
   );
@@ -35,16 +36,18 @@ export const useTransactionHistory = (props) => {
       setLoading(true);
       const { data: createTrnxRes } = await createTransaction(values);
       const [transaction, account] = await Promise.all([
-        getTransactionById(createTrnxRes.transaction_id).then(
+        getTransactionById(
+          createTrnxRes[BACKEND_RESPONSE_KEYS.transactionId]
+        ).then((res) => res.data),
+        getAccountById(createTrnxRes[BACKEND_RESPONSE_KEYS.accountId]).then(
           (res) => res.data
         ),
-        getAccountById(createTrnxRes.account_id).then((res) => res.data),
       ]);
 
       setTransactions((st) => [transaction, ...st]);
       setAccounts((accts) => ({
         ...accts,
-        [account.account_id]: account.balance,
+        [account[BACKEND_RESPONSE_KEYS.accountId]]: account.balance,
       }));
     } catch (err) {
       console.error(err);

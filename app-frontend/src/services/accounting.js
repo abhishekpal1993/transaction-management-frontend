@@ -5,6 +5,7 @@ import {
   CREATE_TRANSACTION_BODY,
   TRANSACTIONS_ENDPOINT,
   TRANSACTION_ENDPOINT,
+  BACKEND_RESPONSE_KEYS,
 } from "../common/constants";
 
 const accounting = axios.create({ baseURL: BACKEND_BASEURL });
@@ -22,17 +23,18 @@ export const getTransactionById = (id) =>
 export const getAccountById = (id) => accounting.get(ACCOUNT_ENDPOINT(id));
 
 export const fetchAllData = async () => {
-  // Fetch data from external API
   const { data: transactions } = await getAllTransactions();
   const promises = [
-    ...new Set(transactions.map((record) => record.account_id)),
+    ...new Set(
+      transactions.map((record) => record[BACKEND_RESPONSE_KEYS.accountId])
+    ),
   ].map((acct) => getAccountById(acct).then((res) => res.data));
 
   const accounts = await Promise.all(promises).then((res) =>
     res.reduce(
       (acc, acct) => ({
         ...acc,
-        [acct.account_id]: acct.balance,
+        [acct[BACKEND_RESPONSE_KEYS.accountId]]: acct.balance,
       }),
       {}
     )

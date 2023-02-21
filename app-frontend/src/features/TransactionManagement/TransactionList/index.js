@@ -1,4 +1,5 @@
 import { TransactionCard } from "./TransactionCard";
+import { BACKEND_RESPONSE_KEYS } from "../../../common/constants";
 
 export const TransactionList = ({ data }) => {
   if (!Array.isArray(data) || data.length < 1) {
@@ -9,8 +10,8 @@ export const TransactionList = ({ data }) => {
 
   return [
     <TransactionCard
-      key={firstItem.transaction_id}
-      accountId={firstItem.account_id}
+      key={firstItem[BACKEND_RESPONSE_KEYS.transactionId]}
+      accountId={firstItem[BACKEND_RESPONSE_KEYS.accountId]}
       amount={firstItem.amount}
       currentAccountBalance={firstItem.balance}
       showBalance={true}
@@ -18,8 +19,8 @@ export const TransactionList = ({ data }) => {
     ...rest.map((transaction) => (
       <TransactionCard
         className="mt-4"
-        key={transaction.transaction_id}
-        accountId={transaction.account_id}
+        key={transaction[BACKEND_RESPONSE_KEYS.transactionId]}
+        accountId={transaction[BACKEND_RESPONSE_KEYS.accountId]}
         amount={transaction.amount}
         currentAccountBalance={transaction.balance}
       />
