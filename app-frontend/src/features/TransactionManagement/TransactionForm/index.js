@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Button } from "../../../components/atoms";
 import { Input } from "../../../components/molecules";
 import { Form } from "../../../components/renderprops";
@@ -5,6 +6,18 @@ import { Form } from "../../../components/renderprops";
 import { schema, initialValue } from "./static";
 
 export const TransactionForm = ({ onSubmit, isLoading }) => {
+  const submitHandler = useCallback((values, { resetForm }) => {
+    onSubmit({
+      ...values,
+      amount: parseInt(values.amount),
+    });
+    resetForm({
+      values: initialValue,
+      errors: {},
+      touched: {},
+    });
+  }, []);
+
   return (
     <form
       className="w-full border py-4 px-4 rounded"
@@ -14,7 +27,7 @@ export const TransactionForm = ({ onSubmit, isLoading }) => {
         validateOnBlur={true}
         initialValues={initialValue}
         validationSchema={schema}
-        onSubmitHandler={onSubmit}
+        onSubmitHandler={submitHandler}
       >
         {({
           values,

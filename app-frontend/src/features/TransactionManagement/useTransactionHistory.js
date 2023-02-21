@@ -12,9 +12,13 @@ export const useTransactionHistory = (props) => {
   const [isLoading, setLoading] = useState(false);
 
   const refetchData = useCallback(async () => {
-    const res = await fetchAllData();
-    setTransactions(res.transactions);
-    setAccounts(res.accounts);
+    try {
+      const res = await fetchAllData();
+      setTransactions(res.transactions);
+      setAccounts(res.accounts);
+    } catch (err) {
+      console.error(err);
+    }
   }, []);
 
   const transactionList = useMemo(
@@ -27,29 +31,31 @@ export const useTransactionHistory = (props) => {
   );
 
   const onSubmitHandler = useCallback(async (values) => {
-    console.log("submit:", values);
-    setLoading(true);
-    const { data: createTrnxRes } = await createTransaction(values);
-    const [transaction, account] = await Promise.all([
-      getTransactionById(createTrnxRes.transaction_id).then((res) => res.data),
-      getAccountById(createTrnxRes.account_id).then((res) => res.data),
-    ]);
+    try {
+      setLoading(true);
+      const { data: createTrnxRes } = await createTransaction(values);
+      const [transaction, account] = await Promise.all([
+        getTransactionById(createTrnxRes.transaction_id).then(
+          (res) => res.data
+        ),
+        getAccountById(createTrnxRes.account_id).then((res) => res.data),
+      ]);
 
-    console.log("after process:", transaction, account);
-
-    setTransactions((st) => [transaction, ...st]);
-    setAccounts((accts) => ({
-      ...accts,
-      [account.account_id]: account.balance,
-    }));
-    setLoading(false);
+      setTransactions((st) => [transaction, ...st]);
+      setAccounts((accts) => ({
+        ...accts,
+        [account.account_id]: account.balance,
+      }));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   // If prefetching data failed then try to fetch data on browser
   useEffect(() => {
     (async () => {
-      console.log("onMounting:", props, transactionList);
-
       if (!props.isPrefetched) {
         await refetchData();
       }

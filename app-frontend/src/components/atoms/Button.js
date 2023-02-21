@@ -19,7 +19,6 @@ export const Button = ({
       type={type || "submit"}
       value={isLoading ? "..." : children}
       readOnly={true}
-      disabled={disabled}
     />
   );
 };

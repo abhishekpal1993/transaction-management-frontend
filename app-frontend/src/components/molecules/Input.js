@@ -23,9 +23,11 @@ export const Input = ({
         {...props}
         className={append(defaultInputClassName, inputClassName)}
       />
-      <span className="relative font-light right-0 top-0 ml-2 text-red-500 text-sm">
-        {error}
-      </span>
+      {!!isError && (
+        <span className="relative font-light right-0 top-0 ml-2 text-red-500 text-sm">
+          {error}
+        </span>
+      )}
     </InputLabel>
   ) : (
     <input
