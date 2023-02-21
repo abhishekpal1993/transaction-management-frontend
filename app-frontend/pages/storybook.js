@@ -25,6 +25,7 @@ export default () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-start w-full flex-1 px-20 text-center">
+        {/* !!! ATOMS !!! */}
         <div className="border-2 py-2 px-4 w-full rounded mb-6">
           <h1 className="text-3xl font-bold leading-tight underline">Atoms</h1>
           <br />
@@ -35,6 +36,7 @@ export default () => {
           <SectionHeader className="mb-4">SectionHeader</SectionHeader>
           <InputLabel className="mb-4">Label</InputLabel>
         </div>
+        {/* !!! MOLECULES !!! */}
         <div className="border-2 py-2 px-4 w-full rounded mb-6">
           <h1 className="text-3xl font-bold leading-tight underline">
             Molecules
@@ -42,16 +44,28 @@ export default () => {
           <br />
           <Input inputClassName="mb-4" placeholder="Enter your name" />
           <Input
-            labelClassName="text-blue-700"
+            isError={true}
+            inputClassName="mb-4"
+            placeholder="Enter your name(Error)"
+          />
+          <Input
             inputClassName="mb-4"
             placeholder='"Peter Griffin" or "Lois Griffin"'
             label="Name"
           />
+          <Input
+            isError={true}
+            inputClassName="mb-4"
+            placeholder='"Peter Griffin" or "Lois Griffin" (Error)'
+            label="Name"
+          />
         </div>
+        {/* !!! SUBMIT FORM !!! */}
         <div className="flex flex-col items-start border-2 py-2 px-4 w-full rounded mb-6">
           <SectionHeader className="mb-2">Submit new transaction</SectionHeader>
           <TransactionForm onSubmit={console.log} />
         </div>
+        {/* !!! TRANSACTION CARDS !!! */}
         <div className="border-2 py-2 px-4 w-full rounded mb-6">
           <h1 className="text-3xl font-bold leading-tight underline">
             Transaction Cards
@@ -85,6 +99,7 @@ export default () => {
             showBalance={true}
           />
         </div>
+        {/* !!! TRANSACTION HISTORY !!! */}
         <div className="flex flex-col items-start border-2 py-2 px-4 w-full rounded mb-6">
           <SectionHeader className="mb-2">Transaction history</SectionHeader>
           <TransactionList

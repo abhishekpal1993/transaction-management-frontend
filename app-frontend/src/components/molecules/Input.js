@@ -1,11 +1,21 @@
 import { append } from "../../utils/classname";
 import { InputLabel } from "../atoms";
 
-export const Input = ({ label, labelClassName, inputClassName, ...props }) => {
-  const defaultLabelClassName =
-    "flex flex-col justify-center items-start w-full";
-  const defaultInputClassName =
-    "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+export const Input = ({
+  label,
+  labelClassName,
+  inputClassName,
+  isError = false,
+  error,
+  ...props
+}) => {
+  const defaultLabelClassName = `flex flex-col justify-center items-start w-full ${
+    !!isError ? "text-red-500" : "text-gray-700"
+  }`;
+  const defaultInputClassName = `appearance-none border rounded w-full py-2 px-3 leading-tight ${
+    !!isError ? "text-red-700 focus:outline-red-500" : "text-gray-700"
+  }`;
+
   return !!label ? (
     <InputLabel className={append(defaultLabelClassName, labelClassName)}>
       {label}
@@ -13,6 +23,9 @@ export const Input = ({ label, labelClassName, inputClassName, ...props }) => {
         {...props}
         className={append(defaultInputClassName, inputClassName)}
       />
+      <span className="relative font-light right-0 top-0 ml-2 text-red-500 text-sm">
+        {error}
+      </span>
     </InputLabel>
   ) : (
     <input

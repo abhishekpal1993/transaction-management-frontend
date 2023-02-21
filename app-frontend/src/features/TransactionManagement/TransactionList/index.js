@@ -1,6 +1,10 @@
 import { TransactionCard } from "./TransactionCard";
 
 export const TransactionList = ({ data }) => {
+  if (!Array.isArray(data) || data.length < 1) {
+    return <div>No Transactions!</div>;
+  }
+
   const [firstItem, ...rest] = data;
 
   return [

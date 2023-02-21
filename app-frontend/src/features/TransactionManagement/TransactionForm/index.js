@@ -4,10 +4,10 @@ import { Form } from "../../../components/renderprops";
 
 import { schema, initialValue } from "./static";
 
-export const TransactionForm = ({ onSubmit }) => {
+export const TransactionForm = ({ onSubmit, isLoading }) => {
   return (
     <form
-      className="w-full border py-2 px-4 rounded"
+      className="w-full border py-4 px-4 rounded"
       onSubmit={(e) => e.preventDefault()}
     >
       <Form
@@ -16,38 +16,55 @@ export const TransactionForm = ({ onSubmit }) => {
         validationSchema={schema}
         onSubmitHandler={onSubmit}
       >
-        {({ values, handleChange, handleSubmit }) => {
-          return (
-            <>
-              <Input
-                type="text"
-                inputClassName="mb-4"
-                data-type="account-id"
-                label="Account ID:"
-                name="accountId"
-                value={values.accountId ?? ""}
-                onChange={handleChange}
-              />
-              <Input
-                type="number"
-                inputClassName="mb-4"
-                data-type="amount"
-                label="Amount:"
-                name="amount"
-                value={values.amount ?? ""}
-                onChange={handleChange}
-              />
-              <Button
-                className="w-1/2"
-                data-type="transaction-submit"
-                onClick={handleSubmit}
-                disabled={!values.amount || !values.accountId}
-              >
-                Submit
-              </Button>
-            </>
-          );
-        }}
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleSubmit,
+          handleBlur,
+        }) => (
+          <>
+            <Input
+              type="text"
+              labelClassName="mb-4"
+              data-type="account-id"
+              label="Account ID:"
+              name="accountId"
+              value={values.accountId ?? ""}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              isError={!!errors.accountId && !!touched.accountId}
+              error={errors.accountId}
+            />
+            <Input
+              type="number"
+              labelClassName="mb-4"
+              data-type="amount"
+              label="Amount:"
+              name="amount"
+              value={values.amount ?? 0}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              isError={!!errors.amount && !!touched.amount}
+              error={errors.amount}
+            />
+            <Button
+              className="w-full"
+              data-type="transaction-submit"
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              disabled={
+                !values.amount ||
+                !values.accountId ||
+                errors.amount ||
+                errors.accountId
+              }
+            >
+              Submit
+            </Button>
+          </>
+        )}
       </Form>
     </form>
   );
