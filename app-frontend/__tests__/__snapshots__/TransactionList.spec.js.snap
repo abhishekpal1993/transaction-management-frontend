@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TransactionList > Handling empty transaction lists snapshot with empty data 1`] = `
+<div>
+  <div>
+    No Transactions!
+  </div>
+</div>
+`;
+
+exports[`TransactionList > Handling non-empty transaction list snapshot with sample data 1`] = `
+<div>
+  <div
+    class="w-full rounded overflow-hidden border border-gray-300 shadow-md px-4 py-2 cursor-default flex flex-col items-start"
+    data-account-id="a5777de7-5604-43d3-8f6c-03acac31e8ca"
+    data-amount="-5"
+    data-balance="10"
+    data-type="transaction"
+  >
+    <p
+      class="text-gray-700 text-base"
+    >
+      Transferred $5 from account a5777de7-5604-43d3-8f6c-03acac31e8ca
+    </p>
+    <p
+      class="text-gray-700 text-base mt-4"
+    >
+      The current account balance $10
+    </p>
+  </div>
+  <div
+    class="w-full rounded overflow-hidden border border-gray-300 shadow-md px-4 py-2 cursor-default flex flex-col items-start mt-4"
+    data-account-id="a5777de7-5604-43d3-8f6c-03acac31e8ca"
+    data-amount="7"
+    data-balance="15"
+    data-type="transaction"
+  >
+    <p
+      class="text-gray-700 text-base"
+    >
+      Transferred $7 to account a5777de7-5604-43d3-8f6c-03acac31e8ca
+    </p>
+  </div>
+</div>
+`;
