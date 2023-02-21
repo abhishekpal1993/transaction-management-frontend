@@ -57,8 +57,8 @@ export const TransactionForm = ({ onSubmit, isLoading }) => {
               disabled={
                 !values.amount ||
                 !values.accountId ||
-                errors.amount ||
-                errors.accountId
+                !!errors.amount ||
+                !!errors.accountId
               }
             >
               Submit
