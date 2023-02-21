@@ -25,23 +25,24 @@ export default () => {
         <div className="border-2 py-2 px-4 w-full rounded">
           <h1 className="text-3xl font-bold leading-tight">Atoms</h1>
           <br />
-          <Button>Click Me!</Button>
-          <Card>
+          <Button className="mb-4">Click Me!</Button>
+          <Card className="mb-4">
             <CardText>Some Text in Card</CardText>
           </Card>
-          <SectionHeader>SectionHeader</SectionHeader>
-          <InputLabel>Label</InputLabel>
+          <SectionHeader className="mb-4">SectionHeader</SectionHeader>
+          <InputLabel className="mb-4">Label</InputLabel>
         </div>
         <br />
         <div className="border-2 py-2 px-4 w-full rounded">
           <h1 className="text-3xl font-bold leading-tight">Molecules</h1>
           <br />
           <Input
-            labelClassName=""
-            inputClassName=""
-            placeholder="enter your name"
+            labelClassName="text-blue-700"
+            inputClassName="mb-4"
+            placeholder='"Peter Griffin" or "Lois Griffin"'
             label="Name"
           />
+          <Input inputClassName="mb-4" placeholder="Enter your name" />
         </div>
       </main>
     </div>
